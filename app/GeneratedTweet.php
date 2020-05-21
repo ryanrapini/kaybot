@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class GeneratedTweet extends Model
 {
-    protected $fillable = ['tweet'];
+    protected $fillable = ['tweet', 'tweeted_at'];
 }

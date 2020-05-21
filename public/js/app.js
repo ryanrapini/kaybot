@@ -1945,19 +1945,19 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.$bus.on('reload-pending-tweets', this.fetchLiveTweets);
+    this.$bus.on('reload-live-tweets', this.fetchLiveTweets);
   },
   beforeDestroy: function beforeDestroy() {
-    this.$bus.off('reload-pending-tweets', this.fetchLiveTweets);
+    this.$bus.off('reload-live-tweets', this.fetchLiveTweets);
   },
   mounted: function mounted() {
-    this.fetchliveTweets();
+    this.fetchLiveTweets();
   },
   methods: {
     fetchLiveTweets: function fetchLiveTweets() {
       var _this = this;
 
-      axios.get('/generated-tweets').then(function (resp) {
+      axios.get('/live-tweets').then(function (resp) {
         _this.liveTweets = resp.data;
       });
     },
@@ -2090,8 +2090,12 @@ __webpack_require__.r(__webpack_exports__);
     doTweet: function doTweet() {
       var _this = this;
 
-      axios.get('/data/tweet').then(function (resp) {
+      axios.get('/actions/tweet').then(function (resp) {
         _this.status = resp.data;
+
+        _this.$bus.emit('reload-pending-tweets');
+
+        _this.$bus.emit('reload-live-tweets');
       });
     }
   }
@@ -37794,7 +37798,7 @@ var render = function() {
               _vm._l(_vm.liveTweets, function(liveTweet, index) {
                 return _c("tr", { key: index }, [
                   _c("td", [
-                    _c("blockquote", [_vm._v(_vm._s(liveTweet.tweet))])
+                    _c("blockquote", [_vm._v(_vm._s(liveTweet.text))])
                   ]),
                   _vm._v(" "),
                   _c("td", [
@@ -37862,7 +37866,9 @@ var render = function() {
               "tbody",
               _vm._l(_vm.pendingTweets, function(pendingTweet, index) {
                 return _c("tr", { key: index }, [
-                  _c("td", [_c("pre", [_vm._v(_vm._s(pendingTweet.tweet))])]),
+                  _c("td", [
+                    _c("blockquote", [_vm._v(_vm._s(pendingTweet.tweet))])
+                  ]),
                   _vm._v(" "),
                   _c("td", [
                     _c(

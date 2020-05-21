@@ -13,7 +13,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="(liveTweet, index) in liveTweets" :key="index">
-                                <td><blockquote>{{ liveTweet.tweet }}</blockquote></td>
+                                <td><blockquote>{{ liveTweet.text }}</blockquote></td>
                                 <td>
                                     {{ liveTweet.created_at }}
                                 </td>
@@ -40,20 +40,20 @@ export default {
     },
 
     created: function() {
-        this.$bus.on('reload-pending-tweets', this.fetchLiveTweets);
+        this.$bus.on('reload-live-tweets', this.fetchLiveTweets);
     },
 
     beforeDestroy() {
-        this.$bus.off('reload-pending-tweets', this.fetchLiveTweets);
+        this.$bus.off('reload-live-tweets', this.fetchLiveTweets);
     },
 
     mounted: function() {
-        this.fetchliveTweets();
+        this.fetchLiveTweets();
     },
 
     methods: {
         fetchLiveTweets: function() {
-            axios.get('/generated-tweets')
+            axios.get('/live-tweets')
                 .then((resp) => {
                     this.liveTweets = resp.data;
                 });

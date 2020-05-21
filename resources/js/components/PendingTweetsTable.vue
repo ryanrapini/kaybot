@@ -13,7 +13,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="(pendingTweet, index) in pendingTweets" :key="index">
-                                <td><pre>{{ pendingTweet.tweet }}</pre></td>
+                                <td><blockquote>{{ pendingTweet.tweet }}</blockquote></td>
                                 <td>
                                     <button type="button" class="btn btn-warning" @click="deletePendingTweet(index)">X
                                     </button>

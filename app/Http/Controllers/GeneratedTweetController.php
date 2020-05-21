@@ -14,7 +14,7 @@ class GeneratedTweetController extends Controller
      */
     public function index()
     {
-        return response()->json(GeneratedTweet::all());
+        return response()->json(GeneratedTweet::where('is_tweeted', false)->get());
     }
 
     /**

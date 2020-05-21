@@ -3,41 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DG\Twitter\Twitter;
-use App\GeneratedTweet;
+use App\Services\TweetService;
 
 class HomeController extends Controller
 {
-    private $twitter;
+    private $tweetService;
 
-    public function __construct()
+    public function __construct(TweetService $tweetService)
     {
         $this->middleware('auth');
-
-        $this->twitter = new Twitter(
-            config('services.twitter.consumer_key'), 
-            config('services.twitter.consumer_secret'),
-            config('services.twitter.access_token'),
-            config('services.twitter.access_token_secret')
-        );
+        $this->tweetService = $tweetService;
     }
 
     public function sendTweet()
     {
-        $tweet = GeneratedTweet::where('is_tweeted', false)->first();
-        \Log::debug($tweet->tweet);
-        // try {
-        //     $this->twitter->send($tweet->tweet);
-        // } catch (DG\Twitter\Exception $e) {
-        //     return response()->json("Error: " . $e->getMessage());
-        // }
-        $tweet->is_tweeted = true;
-        return response()->json("Success");
+        return response()->json($this->tweetService->sendTweet());
     }
 
     public function getLiveTweets()
     {
-        $statuses = $this->twitter->load(Twitter::ME);
+        $statuses = $this->tweetService->getTweets();
         return response()->json($statuses);
     }
     

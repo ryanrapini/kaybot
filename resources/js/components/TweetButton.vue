@@ -36,9 +36,11 @@ export default {
     },
     methods: {
         doTweet: function() {
-            axios.get('/data/tweet')
+            axios.get('/actions/tweet')
                 .then((resp) => {
                     this.status = resp.data;
+                    this.$bus.emit('reload-pending-tweets');
+                    this.$bus.emit('reload-live-tweets');
                 });
         }
     }
