@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\TweetService;
+use App\Setting;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,11 @@ class HomeController extends Controller
     {
         $statuses = $this->tweetService->getTweets();
         return response()->json($statuses);
+    }
+
+    public function getSettings()
+    {
+        return response()->json(Setting::all());
     }
     
     /**

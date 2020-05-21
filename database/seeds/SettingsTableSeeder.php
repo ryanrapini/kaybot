@@ -19,7 +19,7 @@ class SettingsTableSeeder extends Seeder
 
         $settings->insert([
             'name' => 'max_delay',
-            'value' => '86400',
+            'value' => '43200',
         ]);
 
         $settings->insert([

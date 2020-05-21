@@ -19,6 +19,8 @@ Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/settings', 'HomeController@getSettings');
+
 Route::get('/actions/tweet', 'HomeController@sendTweet');
 
 Route::get('live-tweets', 'HomeController@getLiveTweets');
