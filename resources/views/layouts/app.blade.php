@@ -10,6 +10,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script type="text/javascript">
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+            'baseUrl' => url('/')
+    ]); ?>
+    </script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->

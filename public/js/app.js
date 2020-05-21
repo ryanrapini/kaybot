@@ -1957,7 +1957,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchLiveTweets: function fetchLiveTweets() {
       var _this = this;
 
-      axios.get('/live-tweets').then(function (resp) {
+      axios.get(Laravel.baseUrl + '/live-tweets').then(function (resp) {
         _this.liveTweets = resp.data;
       });
     },
@@ -1965,7 +1965,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var id = this.liveTweets[index].id;
-      axios["delete"]('/generated-tweets/' + id).then(function (resp) {
+      axios["delete"](Laravel.baseUrl + 'generated-tweets/' + id).then(function (resp) {
         _this2.fetchLiveTweets();
       });
     }
@@ -2033,7 +2033,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchPendingTweets: function fetchPendingTweets() {
       var _this = this;
 
-      axios.get('/generated-tweets').then(function (resp) {
+      axios.get(Laravel.baseUrl + '/generated-tweets').then(function (resp) {
         _this.pendingTweets = resp.data;
       });
     },
@@ -2041,7 +2041,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var id = this.pendingTweets[index].id;
-      axios["delete"]('/generated-tweets/' + id).then(function (resp) {
+      axios["delete"](Laravel.baseUrl + '/generated-tweets/' + id).then(function (resp) {
         _this2.fetchPendingTweets();
       });
     }
@@ -2090,7 +2090,7 @@ __webpack_require__.r(__webpack_exports__);
     doTweet: function doTweet() {
       var _this = this;
 
-      axios.get('/actions/tweet').then(function (resp) {
+      axios.get(Laravel.baseUrl + '/actions/tweet').then(function (resp) {
         _this.status = resp.data;
 
         _this.$bus.emit('reload-pending-tweets');
@@ -2157,7 +2157,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (this.isMultipleTweets) {
-        axios.post('/generated-tweets/store-many', {
+        axios.post(Laravel.baseUrl + '/generated-tweets/store-many', {
           tweets: this.tweets
         }).then(function (resp) {
           _this.status = resp.data;
@@ -2165,7 +2165,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.$bus.emit('reload-pending-tweets');
         });
       } else {
-        axios.post('/generated-tweets', {
+        axios.post(Laravel.baseUrl + '/generated-tweets', {
           tweets: this.tweets
         }).then(function (resp) {
           _this.status = resp.data;

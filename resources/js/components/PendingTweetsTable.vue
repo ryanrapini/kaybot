@@ -54,14 +54,14 @@ export default {
 
     methods: {
         fetchPendingTweets: function() {
-            axios.get('/generated-tweets')
+            axios.get(Laravel.baseUrl + '/generated-tweets')
                 .then((resp) => {
                     this.pendingTweets = resp.data;
                 });
         },
         deletePendingTweet: function(index) {
             var id = this.pendingTweets[index].id;
-            axios.delete('/generated-tweets/' + id)
+            axios.delete(Laravel.baseUrl + '/generated-tweets/' + id)
                 .then((resp) => {
                     this.fetchPendingTweets();
                 });

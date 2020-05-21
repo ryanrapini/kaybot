@@ -36,7 +36,7 @@ export default {
     },
     methods: {
         doTweet: function() {
-            axios.get('/actions/tweet')
+            axios.get(Laravel.baseUrl + '/actions/tweet')
                 .then((resp) => {
                     this.status = resp.data;
                     this.$bus.emit('reload-pending-tweets');

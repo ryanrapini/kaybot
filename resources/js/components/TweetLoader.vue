@@ -50,14 +50,14 @@ export default {
     methods: {
         saveTweets: function() {
             if(this.isMultipleTweets){
-                axios.post('/generated-tweets/store-many', { tweets: this.tweets })
+                axios.post(Laravel.baseUrl + '/generated-tweets/store-many', { tweets: this.tweets })
                     .then((resp) => {
                         this.status = resp.data;
                         this.$bus.emit('reload-pending-tweets');
                     });    
             }
             else {
-                axios.post('/generated-tweets', { tweets: this.tweets })
+                axios.post(Laravel.baseUrl + '/generated-tweets', { tweets: this.tweets })
                     .then((resp) => {
                         this.status = resp.data;
                         this.$bus.emit('reload-pending-tweets');
