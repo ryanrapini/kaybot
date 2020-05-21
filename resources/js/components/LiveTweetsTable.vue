@@ -8,7 +8,7 @@
                         <thead>
                             <tr>
                                 <th>Tweet</th>
-                                <th style="width:20%">Date</th>
+                                <th style="width:30%">Date</th>
                             </tr>
                         </thead>
                         <tbody>
