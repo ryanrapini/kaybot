@@ -60,7 +60,6 @@ class TweetScheduler extends Command
             $this->tweetService->sendTweet();
 
             $offset = rand($min_delay, $max_delay);
-            $offset = 4;
             \Log::info('Next offset: ' . $offset. ' seconds.');
             $lastTimeObj->value = $current_seconds + $offset;
             $lastTimeObj->save();
